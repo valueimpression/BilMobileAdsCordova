@@ -18,7 +18,7 @@ export class YourClass {
         // Must initialize before create ads
         if (this.platform.is("ios") || this.platform.is("android")) {
             this.ads = cordova.plugins.BilMobileAdsCordova
-            this.ads.initialize(false, (data) => console.log("HNL: " + data), (err) => console.log("HNL: err - " + err));
+            this.ads.initialize(false, (data) => console.log("data: " + data), (err) => console.log("err: " + err));
         }
 
         // Add Event Listener
