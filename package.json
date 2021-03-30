@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-bilmobileads",
+  "version": "1.0.0",
+  "description": "A Ionic Cordova plugin for integrate ValueImpressionSDK",
+  "cordova": {
+    "id": "cordova-plugin-bilmobileads",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valueimpression/cordova-plugin-bilmobileads.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "linhhn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valueimpression/cordova-plugin-bilmobileads/issues"
+  },
+  "homepage": "https://github.com/valueimpression/cordova-plugin-bilmobileads#readme"
+}

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-bilmobileads" version="1.0.0"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>BilMobileAdsCordova</name>
+    <js-module name="BilMobileAdsCordova" src="www/BilMobileAdsCordova.js">
+        <clobbers target="cordova.plugins.BilMobileAdsCordova" />
+    </js-module>
+    
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="BilMobileAdsCordova">
+                <param name="android-package" value="cordova.plugin.bilmobileads.BilMobileAdsCordova" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+
+        <hook type="after_prepare" src="apply-to-gradle.properties.js" />
+        <source-file src="src/android/BilMobileAdsCordova.java" target-dir="src/cordova/plugin/bilmobileads" />
+        <source-file src="src/android/BilUtilsCordova.java" target-dir="src/cordova/plugin/bilmobileads" />
+
+        <framework src="src/android/cordova-plugin-bilmobileads-plugin.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="BilMobileAdsCordova">
+                <param name="ios-package" value="BilMobileAdsCordova" />
+            </feature>
+        </config-file>
+        <config-file target="*-Info.plist" parent="GADIsAdManagerApp">
+            <true/>
+        </config-file>
+
+        <!-- <source-file src="src/ios/BilMobileAdsCordova.m" /> -->
+        <source-file src="src/ios/PluginSwiftDemo.swift" />
+
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
+        <podspec>
+            <pods use-frameworks="false">
+                <pod name="BilMobileAds" spec="~> 1.2.1"/>
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
