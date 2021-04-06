@@ -364,11 +364,14 @@ public class BilMobileAdsCordova extends CordovaPlugin {
     this.cordova.getActivity().runOnUiThread(() -> {
       try {
         Insets insets = getSafeInsets();
-        JSONObject data = new JSONObject();
         int bannerH = this.adBanner.getHeight() > 0 ? this.adBanner.getHeight() : 50;
+
+        JSONObject data = new JSONObject();
         data.put("topPadding", bannerH + insets.top);
         data.put("bottomPadding", bannerH + insets.bottom);
-        callbackContext.success(data);
+
+        String dataStr = "{\"topPadding\": " + bannerH + insets.top + ", \"bottomPadding\": " + bannerH + insets.bottom + "}";
+        callbackContext.success(dataStr);
       } catch (JSONException e) {
         callbackContext.error(e.getLocalizedMessage());
       }
@@ -566,12 +569,18 @@ public class BilMobileAdsCordova extends CordovaPlugin {
     });
   }
 
-  public void isReadyInterstitial(JSONArray args, CallbackContext callbackContext) throws JSONException {
+  public void isReadyInterstitial(JSONArray args, CallbackContext callbackContext) {
     if (!this.isFullReady(callbackContext)) return;
 
-    JSONObject data = new JSONObject();
-    data.put("isReady", this.adInterstitial.isReady());
-    callbackContext.success(data);
+    this.cordova.getActivity().runOnUiThread(() -> {
+      try {
+        JSONObject data = new JSONObject();
+        data.put("isReady", this.adInterstitial.isReady());
+        callbackContext.success(data);
+      } catch (JSONException e) {
+        callbackContext.error(e.getLocalizedMessage());
+      }
+    });
   }
 
   boolean isFullReady(CallbackContext callbackContext) {
@@ -633,7 +642,9 @@ public class BilMobileAdsCordova extends CordovaPlugin {
             JSONObject info = new JSONObject();
             info.put("typeRewarded", adRewardItem.getType());
             info.put("amountRewarded", adRewardItem.getAmount());
-            fireEventToCordova(REWARDED_EVENT, getMess(BilUtilsCordova.RewardedType, BilUtilsCordova.rewarded, info.toString()));
+
+            String data = "{\"typeRewarded\": \"" + adRewardItem.getType() + "\", \"amountRewarded\": " + adRewardItem.getAmount() + "}";
+            fireEventToCordova(REWARDED_EVENT, getMess(BilUtilsCordova.RewardedType, BilUtilsCordova.rewarded, data));
           } catch (JSONException e) {
             callbackContext.error(e.getLocalizedMessage());
           }
@@ -695,9 +706,15 @@ public class BilMobileAdsCordova extends CordovaPlugin {
   public void isReadyRewarded(JSONArray args, CallbackContext callbackContext) throws JSONException {
     if (!this.isRewardedReady(callbackContext)) return;
 
-    JSONObject data = new JSONObject();
-    data.put("isReady", this.adRewarded.isReady());
-    callbackContext.success(data);
+    this.cordova.getActivity().runOnUiThread(() -> {
+      try {
+        JSONObject data = new JSONObject();
+        data.put("isReady", this.adRewarded.isReady());
+        callbackContext.success(data);
+      } catch (JSONException e) {
+        callbackContext.error(e.getLocalizedMessage());
+      }
+    });
   }
 
   boolean isRewardedReady(CallbackContext callbackContext) {
