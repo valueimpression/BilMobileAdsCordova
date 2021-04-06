@@ -35,12 +35,12 @@
             <true/>
         </config-file>
 
-        <!-- <source-file src="src/ios/BilMobileAdsCordova.m" /> -->
-        <source-file src="src/ios/PluginSwiftDemo.swift" />
+        <source-file src="src/ios/BilMobileAdsCordova.swift" />
+        <source-file src="src/ios/BilUtilsCordova.swift" />
 
         <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
         <podspec>
-            <pods use-frameworks="false">
+            <pods use-frameworks="true">
                 <pod name="BilMobileAds" spec="~> 1.2.1"/>
             </pods>
         </podspec>
