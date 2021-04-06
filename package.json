@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-bilmobileads",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Ionic Cordova plugin for integrate ValueImpressionSDK",
   "cordova": {
     "id": "cordova-plugin-bilmobileads",
